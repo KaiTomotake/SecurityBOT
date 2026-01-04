@@ -1,7 +1,7 @@
 import discord
 import dotenv
-import datetime
 
+import datetime
 import pathlib
 
 class Client(discord.Client):
@@ -17,11 +17,9 @@ def create_report(title: str) -> discord.Embed:
     embed = discord.Embed(title=title, timestamp=datetime.datetime.now())
     embed.set_footer(text="SecurityBOT | ErrorReport")
 
-
 def create_log(title: str) -> discord.Embed:
     embed = discord.Embed(title=title, timestamp=datetime.datetime.now())
     embed.set_footer(text="SecurityBot | Action Log")
-
 
 @discord.app_commands.command(name="ban", description="メンバーをBANします")
 @discord.app_commands.guild_only
