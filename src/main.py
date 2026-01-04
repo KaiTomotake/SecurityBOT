@@ -13,5 +13,6 @@ class Client(discord.Client):
         await self.tree.sync()
     
 if __name__ == "__main__":
-    client = Client()
-    client.run(dotenv.get_key(pathlib.Path(__file__).parent.joinpath(".env"), "DISCORD_TOKEN"))
+    dotenv_path = pathlib.Path(__file__).parent.joinpath(".env")
+    token = dotenv.get_key(dotenv_path, "DISCORD_TOKEN")
+    Client().run(token)
