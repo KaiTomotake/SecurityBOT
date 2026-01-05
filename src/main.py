@@ -23,7 +23,7 @@ def create_log(title: str, log_style: LogStyle, executor: discord.Member) -> dis
     FOOTER_HEAD = "SecurityBOT | "
     match log_style:
         case LogStyle.Success:
-            embed.set_footer("{}ErrprReport".format(FOOTER_HEAD))
+            embed.set_footer("{}ErrorReport".format(FOOTER_HEAD))
         case LogStyle.Error:
             embed.set_footer("{}ActionLog".format(FOOTER_HEAD))
     embed.add_field(name=executor.name, value="(`{}`)".format(executor.id), inline=False)
