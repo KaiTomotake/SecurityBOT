@@ -27,7 +27,7 @@ def create_log(title: str, log_style: LogStyle, executor: discord.Member) -> dis
         case LogStyle.Error:
             embed.set_footer(text=FOOTER_HEAD.format("ErrorReport"))
     embed.add_field(
-        name="実行者", value="{} (`{}`)".format(executor.name, executor.id), inline=False
+        name="実行者", value=f"{executor.name} (`{executor.id}`)", inline=False
     )
     return embed
 
