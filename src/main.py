@@ -20,14 +20,14 @@ class LogStyle(enum.Enum):
 
 def create_log(title: str, log_style: LogStyle, executor: discord.Member) -> discord.Embed:
     embed = discord.Embed(title=title, timestamp=datetime.datetime.now())
-    FOOTER_HEAD = "SecurityBOT | "
+    FOOTER_HEAD = "SecurityBOT | {}"
     match log_style:
         case LogStyle.Success:
-            embed.set_footer(text="{}ActionLog".format(FOOTER_HEAD))
+            embed.set_footer(text=FOOTER_HEAD.format("ActionLog"))
         case LogStyle.Error:
-            embed.set_footer(text="{}ErrorReport".format(FOOTER_HEAD))
+            embed.set_footer(text=FOOTER_HEAD.format("ErrorReport"))
     embed.add_field(
-        name="実行者", value="{} (`{}`)".format(executor.name, executor.id), inline=False
+        name="実行者", value=f"{executor.display_name} (`{executor.id}`)", inline=False
     )
     return embed
 
@@ -45,18 +45,18 @@ async def ban_cmd(
     except discord.Forbidden:
         embed = create_log("BOTの権限が足りません", LogStyle.Error, interaction.user)
         embed.add_field(
-            name="対象", value=f"{target.name} (`{target.id}`)", inline=False
+            name="対象", value=f"{target.display_name} (`{target.id}`)", inline=False
         )
     except Exception as e:
         embed = create_log("BANに失敗しました", LogStyle.Error, interaction.user)
         embed.add_field(
-            name="対象", value=f"{target.name} (`{target.id}`)", inline=False
+            name="対象", value=f"{target.display_name} (`{target.id}`)", inline=False
         )
-        embed.add_field(name="エラー", value=type(e).__name__, inline=False)
+        embed.add_field(name="エラー", value=f"{type(e).__name__}: {str(e)}", inline=False)
     else:
         embed = create_log("BANに成功しました", LogStyle.Success, interaction.user)
         embed.add_field(
-            name="対象", value=f"{target.name} (`{target.id}`)", inline=False
+            name="対象", value=f"{target.display_name} (`{target.id}`)", inline=False
         )
         embed.add_field(name="理由", value=reason, inline=False)
     await interaction.response.send_message(embed=embed)
