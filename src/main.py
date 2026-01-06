@@ -23,10 +23,12 @@ def create_log(title: str, log_style: LogStyle, executor: discord.Member) -> dis
     FOOTER_HEAD = "SecurityBOT | "
     match log_style:
         case LogStyle.Success:
-            embed.set_footer("{}ErrprReport".format(FOOTER_HEAD))
+            embed.set_footer(text="{}ErrprReport".format(FOOTER_HEAD))
         case LogStyle.Error:
-            embed.set_footer("{}ActionLog".format(FOOTER_HEAD))
-    embed.add_field(name=executor.name, value="(`{}`)".format(executor.id), inline=False)
+            embed.set_footer(text="{}ActionLog".format(FOOTER_HEAD))
+    embed.add_field(
+        name="実行者", value="{} (`{}`)".format(executor.name, executor.id), inline=False
+    )
     return embed
 
 @discord.app_commands.command(name="ban", description="メンバーをBANします")
